@@ -3,6 +3,7 @@
 
 Modules for this proyect:
 npm i dotenv
+npm i md5
 npm i mongoose
 npm i nodemon
 npm i express
