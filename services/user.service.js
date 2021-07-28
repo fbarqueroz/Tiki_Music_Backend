@@ -7,7 +7,8 @@ userService.createUser = async function ({ name, email, password }) {
     const user = new User({ name, email, password });
     const newUser = await user.save();
     return newUser;
-  } catch (e) {
+  } catch (error) {
+    console.log(error.message);
     throw new Error('Error while save user');
   }
 };
@@ -17,6 +18,7 @@ userService.getUsers = async function () {
     const users = await User.find({});
     return users;
   } catch (error) {
+    console.log(error.message);
     throw new Error('Error while Pginating Users');
   }
 };
@@ -26,6 +28,7 @@ userService.getUser = async function ({ id }) {
     const user = await User.findById(id);
     return user;
   } catch (error) {
+    console.log(error.message);
     throw new Error ('Error while retirning the user');
   }
 }
@@ -37,6 +40,7 @@ userService.updateUser = async function ({ id }, { name, email, password }) {
     await updateUser.save();
     return updateUser;
   } catch (error) {
+    console.log(error.message);
     throw new Error ('Error while update the user');
   }
 }
