@@ -19,7 +19,7 @@ const mongoose = require('mongoose');
 
 // .env
 const HOSTNAME = process.env.HOSTNAME || 'localhost';
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 // Collections routes
 const userRoute = require('./routes/user.route');

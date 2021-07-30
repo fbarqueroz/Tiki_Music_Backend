@@ -6,7 +6,7 @@ RPlayedService.createRPlayed = async function ({id_user, date, songs}){
         const rPlayed = new RPlayed({id_user, date, songs});
         const newRPlayed = await rPlayed.save();
         return newRPlayed;
-    } catch(e) {
+    } catch(error) {
         throw new Error ('Error while save the recently song played');
     }
 };

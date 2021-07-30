@@ -7,7 +7,7 @@ userService.createUser = async function ({ name, email, password }) {
     const user = new User({ name, email, password });
     const newUser = await user.save();
     return newUser;
-  } catch (e) {
+  } catch (error) {
     throw new Error('Error while save user');
   }
 };
