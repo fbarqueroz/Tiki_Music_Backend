@@ -31,16 +31,51 @@ async function updateFavorite(user, songs) {
   }
 }
 
-favoritesService.upsertFavorite = async function ({id_user, songs}) {
+async function deleteFavoriteMusic(user, songs){
   try {
-    const user = findUser(id_user);
-    if(user) {
-      return await updateFavorite(user, songs);
-    }
-    return await createFavorite;
-  } catch(error) {
-    throw new Error ('Error while save the favorite song');
+      user.songs.pull(songs.toString());
+      user.save();
+      return user;
   }
-};
+  catch (e){
+      console.log('Error message', e.message);
+      throw Error ('Error while delete Favorite Music')
+  }
+}
+
+favoritesService.upsertFavorite = async function({id_user, songs}){
+  try {
+      const user = await findUser(id_user);
+      if(user){
+          return await updateFavoriteMusic(user, songs);
+      }
+      return await createFavorite(id_user, songs);
+  }
+  catch (e){
+      console.log('Error message', e.message);
+      throw Error ('Error while upsert Favorite Music');
+  }
+}
+
+favoritesService.getFavorite = async function () {
+  try {
+      const favoriteMusic = await FavoriteMusic.find({});
+      return favoriteMusic;
+  }catch (e){
+      console.log('Error message', e.message);
+      throw Error ('Error while paginating favorite music');
+  }
+} 
+
+favoritesService.deleteFavorite = async function({songs, id_user}){
+  try{
+      const user = await findUser(id_user);
+      if(user){
+          return await deleteFavoriteMusic(user, songs);
+      }
+  }catch(e){
+      throw new Error('Error while delete favorite');
+  }
+}
 
 module.exports = favoritesService;
