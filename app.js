@@ -29,7 +29,7 @@ const playlistRoute = require('./routes/playlistRoute');
 const rPlayedRoute = require('./routes/rPlayed.route');
 
 
-mongoose.connect(process.env.DATABASE_URL);
+mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser:true});
 const db = mongoose.connection;
 db.on('error', error => console.log(error));
 db.once('open', ()=> console.log('**** Connection to db established ****'));
@@ -43,11 +43,11 @@ app.use(express.urlencoded({
 // Routers
 app.use('/', userRoute);
 app.use('/', favoriteRoute);
-app.use('./', playlistRoute);
+app.use('/', playlistRoute);
 app.use('/', rPlayedRoute);
 
 app.use('*', (req, res) => {
-  res.status(404);
+  res.status(400);
   res.send("Path cannot found");
 });
 
