@@ -1,23 +1,23 @@
-const RPlayed = require('../models/user.model');
-const RPlayedService = {};
+const RecentlyPlayed = require('../models/user.model');
+const RecentlyPlayedService = {};
 
-RPlayedService.createRPlayed = async function ({id_user, date, songs}){
+RecentlyPlayedService.createRecentlyPlayed = async function ({id_user, date, songs}){
     try {
-        const rPlayed = new RPlayed({id_user, date, songs});
-        const newRPlayed = await rPlayed.save();
-        return newRPlayed;
+        const recentlyPlayed = new RecentlyPlayed({id_user, date, songs});
+        const newRecentlyPlayed = await recentlyPlayed.save();
+        return newRecentlyPlayed;
     } catch(error) {
         throw new Error ('Error while save the recently song played');
     }
 };
 
-RPlayedService.getRPLayed = async function () {
+RecentlyPlayedService.getRecentlyPLayed = async function () {
     try {
-        const rPlayed = await User.find({});
-        return rPlayed;
+        const recentlyPlayed = await User.find({});
+        return recentlyPlayed;
     } catch (error) {
         throw new Error ('Error while Pginating the recently played song');
     }
 };
 
-module.exports = RPlayedService;
+module.exports = RecentlyPlayedService;
