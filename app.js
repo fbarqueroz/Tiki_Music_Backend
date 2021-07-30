@@ -47,8 +47,8 @@ app.use('./', playlistRoute);
 app.use('/', rPlayedRoute);
 
 app.use('*', (req, res) => {
-  res.status(400);
-  res.send("Path no found");
+  res.status(404);
+  res.send("Path cannot found");
 });
 
 app.listen(PORT, HOSTNAME, () => {
