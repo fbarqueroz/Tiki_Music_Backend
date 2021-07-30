@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const rPLayedSchema = new Schema ({
+const recentlyPLayedSchema = new Schema ({
     id_user: {
         type: String,
         required: true
@@ -33,5 +33,5 @@ const rPLayedSchema = new Schema ({
     */
 }, {versionKey: false });
 
-const rPLayed = mongoose.model('rPLayed', rPLayedSchema);
-module.exports = rPLayed;
+const recentlyPLayed = mongoose.model('recentlyPLayed', recentlyPLayedSchema);
+module.exports = recentlyPLayed;
