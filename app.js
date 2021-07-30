@@ -20,7 +20,7 @@ const mongoose = require('mongoose');
 
 // .env
 const HOSTNAME = process.env.HOSTNAME || 'localhost';
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 // Collections routes
 const userRoute = require('./routes/user.route');
@@ -47,8 +47,8 @@ app.use('./', playlistRoute);
 app.use('/', rPlayedRoute);
 
 app.use('*', (req, res) => {
-  res.status(400);
-  res.send("Path no found");
+  res.status(404);
+  res.send("Path cannot found");
 });
 
 app.listen(PORT, HOSTNAME, () => {

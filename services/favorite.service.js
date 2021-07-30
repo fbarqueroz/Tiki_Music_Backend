@@ -38,7 +38,7 @@ favoritesService.upsertFavorite = async function ({id_user, songs}) {
       return await updateFavorite(user, songs);
     }
     return await createFavorite;
-  } catch(e) {
+  } catch(error) {
     throw new Error ('Error while save the favorite song');
   }
 };
