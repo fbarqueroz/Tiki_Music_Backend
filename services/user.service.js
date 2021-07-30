@@ -27,7 +27,7 @@ userService.getUsers = async function () {
 userService.getUser = async function ({ id }) {
   try {
     const user = await User.findById(id);
-    let getUser = JSON.parse(JSON.stringify(user));
+    let getUser = JSON.parse(JSON.stringify(users));
     delete getUser.password;
     return user;
   } catch (error) {
