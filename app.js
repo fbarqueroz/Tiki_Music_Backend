@@ -26,7 +26,7 @@ const PORT = process.env.PORT || 8080;
 const userRoute = require('./routes/user.route');
 const favoriteRoute = require('./routes/favorite.route');
 const playlistRoute = require('./routes/playlistRoute');
-const rPlayedRoute = require('./routes/rPlayed.route');
+const recentlyPlayedRoute = require('./routes/recentlyPlayed.route');
 
 
 mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser:true});
@@ -44,7 +44,7 @@ app.use(express.urlencoded({
 app.use('/', userRoute);
 app.use('/', favoriteRoute);
 app.use('/', playlistRoute);
-app.use('/', rPlayedRoute);
+app.use('/', recentlyPlayedRoute);
 
 app.use('*', (req, res) => {
   res.status(400);

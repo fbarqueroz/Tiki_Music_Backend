@@ -1,4 +1,4 @@
-const RPlayed = require('../models/user.model');
+const RPlayed = require('../models/recentlyPlayed.model');
 const RPlayedService = {};
 
 RPlayedService.createRPlayed = async function ({id_user, date, songs}){
