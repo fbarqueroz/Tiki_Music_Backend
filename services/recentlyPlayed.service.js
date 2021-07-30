@@ -14,7 +14,7 @@ RecentlyPlayedService.createRecentlyPlayed = async function ({id_user, date, son
 RecentlyPlayedService.getRecentlyPLayed = async function () {
     try {
         const recentlyPlayed = await User.find({});
-        return recentlyPlayed;
+        return recentlyPlayed; 
     } catch (error) {
         throw new Error ('Error while Pginating the recently played song');
     }
