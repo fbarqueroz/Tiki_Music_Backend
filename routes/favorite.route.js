@@ -4,7 +4,7 @@ const favoriteController = require('../controllers/favorite.controller');
 
 //actualizar datos
 router.put('/favorite', favoriteController.upsert);
-router.get('/favorite', favoriteController.getFavorite);
-router.delete('/favorite', favoriteController.delete);
+router.get('/favorite/:id_user', favoriteController.getFavoriteMusicByUser);
+router.delete('/favorite/:id_user/song/:song', favoriteController.deleteFavoriteMusicByUserAndSong);
 
 module.exports = router;

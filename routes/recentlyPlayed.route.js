@@ -1,9 +1,10 @@
 const express = require('express');
+
 const router = express.Router();
-const recentlyPlayedController = require('../controllers/recentlyPlayedcontroller');
+const recentlyPlayedcontroller = require('../controllers/recentlyPlayedcontroller');
 
-router.post('/recently-played', recentlyPlayedController.create);
-router.get('/recently-played', recentlyPlayedController.getRecentlyPlayed);
+router.put('/recently-played', recentlyPlayedcontroller.upsert);
 
+router.get('/recently-played/:id_user', recentlyPlayedcontroller.getRecents);
 
 module.exports = router;

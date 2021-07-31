@@ -3,35 +3,16 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const recentlyPLayedSchema = new Schema ({
+const recentlyPlayedSchema = new Schema ({
     id_user: {
-        type: String,
-        required: true
-    },
-    date: {
-        type: String,
+        type: Schema.Types.ObjectId,
         required: true
     },
     songs: {
-        type: Array,
+        type: [String],
         required: true
     }
-
-    /*
-        id_user: {
-        type: String,
-        required: true
-    },
-    name: {
-        type: String,
-        required: true
-    },
-    songs: {
-        type: Array,
-        required: true
-    }
-    */
 }, {versionKey: false });
 
-const recentlyPLayed = mongoose.model('recentlyPLayed', recentlyPLayedSchema);
-module.exports = recentlyPLayed;
+const recentlyPlayed = mongoose.model('recentlyPlayed', recentlyPlayedSchema);
+module.exports = recentlyPlayed;

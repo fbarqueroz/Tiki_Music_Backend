@@ -34,6 +34,7 @@ userService.getUser = async function ({ id }) {
 
 userService.updateUser = async function ({ id }, { name, email, password }) {
   try {
+    console.log(id,name,email,password)
     const user = await User.findById(id);
     const updateUser = await user.set({name, email, password: md5(password)});
     await updateUser.save();

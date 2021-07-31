@@ -1,23 +1,26 @@
-const recentlyPlayedService = require('../services/recentlyPlayed.service');
-const recentlyPlayedController = {};
+const recentsService = require('../services/recentlyPlayed.service');
 
-recentlyPlayedController.create = async function (req, res, next) {
-    try {
-        newRecentlyPlayed = await recentlyPlayedService.createRecetlyPlayed(req.body);
-        return res.status(201).json({newRecentlyPlayed});
-    } catch(error) {
-        return res.status(400).json({status: 400, message: error.message});
+const recentsController = {};
+
+recentsController.upsert = async function (req, res, next) {
+  try {
+    const upsertRecents = await recentsService.upsertRecents(req.body);
+    return res.status(201).json({ status: 201, data: upsertRecents});
+  } catch (error) {
+    return res.status(400).json({ status: 400, message: error.message });
+  }
+};
+
+recentsController.getRecents = async function (req, res, next) {
+  try {
+    const userId = await recentsService.getRecents(req.params);
+    if (userId == null) {
+      return res.status(400).json({ status: 200, data: userId, message: 'Cannot find recents with that user id' });
     }
-}
+    return res.status(200).json({ dtatus: 200, data: userId, message: 'Successfully recents retrieved' });
+  } catch (error) {
+    return res.status(400).json({ status: 400, message: error.message });
+  }
+};
 
-recentlyPlayedController.getRecentlyPlayed = async function (req, res, next) {
-    try {
-        /*Consultar error dice que recentlyPlayedService.getRPlayed() is a function*/
-        const recentlyPlayed = await recentlyPlayedService.getRecentlyPlayed();
-        return res.status(200).json({status: 200, data: recentlyPlayed, message: 'Successfully recently played song retrieved'});
-    } catch (error) {
-        return res.status(400).json({status: 400, message: error.message});
-    }
-}
-
-module.exports = recentlyPlayedController;
+module.exports = recentsController;
