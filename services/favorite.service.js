@@ -1,11 +1,11 @@
-const Favorite = require('../models/favorite.model');
+const FavoriteMusic = require('../models/favorite.model')
 const mongoose = require('mongoose');
 
 const favoriteMusicService = {}
 
 favoriteMusicService.getFavoriteMusicbyUser = async function ({id_user}) {
     try {
-        const favoriteMusic = await Favorite.find({id_user: mongoose.Types.ObjectId(id_user)})
+        const favoriteMusic = await FavoriteMusic.find({id_user: mongoose.Types.ObjectId(id_user)})
         return favoriteMusic;
     } catch (e) {
         // Log Errors
@@ -15,7 +15,7 @@ favoriteMusicService.getFavoriteMusicbyUser = async function ({id_user}) {
 
 async function findUser (id_user) {
     try {
-        const user = await Favorite.findOne({id_user: mongoose.Types.ObjectId(id_user)})
+        const user = await FavoriteMusic.findOne({id_user: mongoose.Types.ObjectId(id_user)})
         return user ? user : null;
     } catch (e) {
         // Log Errors
@@ -47,9 +47,9 @@ async function updateFavoriteMusic (user, songs) {
     }
 }
 
-async function deleteFavoriteMusic (user, songs) {
+async function deleteFavoriteMusic (user, song) {
     try {
-        user.songs.pull(songs);
+        user.songs.pull(song);
         user.save()
         return user;
     } catch (e) {
