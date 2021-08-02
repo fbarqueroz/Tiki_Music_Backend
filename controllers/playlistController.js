@@ -23,7 +23,7 @@ playlistController.getPlaylist = async function (req, res, next) {
 playlistController.updatePlaylist = async function (req, res, next) {
   try{
       const newPlaylist = await playlistService.updatePlaylist(req.params, req.body);
-      return res.status(201).json({ status : 200 , data: updatePlaylist, message:'Playlist Updated successfully'});
+      return res.status(201).json({ newPlaylist });
   }catch(error){
       return res.status(400).json({ status: 400, message: error.message })
   }
