@@ -29,11 +29,11 @@ PlaylistService.deletePlaylist = async function({id}){
   }
 }
 
-PlaylistService.updatePlaylist = async function({id},{songs,id_user, playlistName}){
+PlaylistService.updatePlaylist = async function({id},{song,id_user, playlistName}){
 try{
     const Playlist = await Playlists.findById(id);
-    const updatePlay = await Playlist.set({songs,id_user, playlistName});
-    Playlist.songs.push(songs.toString());
+    const updatePlay = await Playlist.set({song,id_user, playlistName});
+    Playlist.songs.pull(songs.toString());
     await updatePlay.save();
     return updatePlay;
 }catch (error){
