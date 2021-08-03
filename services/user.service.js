@@ -53,4 +53,24 @@ userService.deleteUser = async function({id}){
       throw new Error ('Error while delete user');
   }
 }
+userService.userLogin = async function ({ email, password }) {
+  try {
+    const userInfo = await User.findOne({ email });
+    if (userInfo.password === md5(password)) {
+      const info = {
+        id: userInfo.id,
+       
+        status: true,
+      };
+      return info;
+    }
+    const info = {
+      status: false,
+    };
+    return info;
+  } catch (e) {
+    console.log(e.message);
+    throw new Error('Error dont exist User');
+  }
+};
 module.exports = userService;
