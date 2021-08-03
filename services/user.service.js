@@ -68,8 +68,8 @@ userService.userLogin = async function ({ email, password }) {
       status: false,
     };
     return info;
-  } catch (e) {
-    console.log(e.message);
+  } catch (error) {
+    console.log(error.message);
     throw new Error("Error doesn't exist User");
   }
 };
