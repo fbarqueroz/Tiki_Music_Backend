@@ -70,7 +70,7 @@ userService.userLogin = async function ({ email, password }) {
     return info;
   } catch (e) {
     console.log(e.message);
-    throw new Error('Error dont exist User');
+    throw new Error("Error doesn't exist User");
   }
 };
 module.exports = userService;
