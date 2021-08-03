@@ -1,7 +1,8 @@
+// Var
 const recentsService = require('../services/recentlyPlayed.service');
-
 const recentsController = {};
 
+// Put controller
 recentsController.upsert = async function (req, res, next) {
   try {
     const upsertRecents = await recentsService.upsertRecents(req.body);
@@ -11,6 +12,7 @@ recentsController.upsert = async function (req, res, next) {
   }
 };
 
+// Get controller
 recentsController.getRecents = async function (req, res, next) {
   try {
     const userId = await recentsService.getRecents(req.params);

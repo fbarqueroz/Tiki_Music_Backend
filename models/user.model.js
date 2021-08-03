@@ -1,8 +1,7 @@
-// User's models database
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// Schema structure
 const userSchema = new Schema ({
   name: {
     type: String,

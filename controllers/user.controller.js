@@ -1,7 +1,8 @@
+// Var
 const userService = require('../services/user.service');
-
 const userController = {};
 
+// Push user controller
 userController.create = async function (req, res, next) {
   try {
     newUser = await userService.createUser(req.body);
@@ -11,6 +12,7 @@ userController.create = async function (req, res, next) {
   }
 };
 
+// Get all users controller
 userController.getUsers = async function (req, res, next) {
   try {
     const users = await userService.getUsers();
@@ -20,6 +22,7 @@ userController.getUsers = async function (req, res, next) {
   }
 };
 
+// Get user by id controller
 userController.getUser = async function (req, res, next) {
   try {
     const user = await userService.getUser(req.params);
@@ -32,6 +35,7 @@ userController.getUser = async function (req, res, next) {
   }
 };
 
+// Put user controller
 userController.updateUser = async function(req, res, next){
   try{
       const updateUser = await userService.updateUser(req.params, req.body);
@@ -42,6 +46,7 @@ userController.updateUser = async function(req, res, next){
   }
 }
 
+// Delete user controller
 userController.deleteUser = async function (req, res, next){ 
   try{
       const user = await userService.deleteUser(req.params)
@@ -51,6 +56,8 @@ userController.deleteUser = async function (req, res, next){
       return res.status(400).json({status:400, message: error.message})
   }
 }
+
+// Login user controller
 userController.userLogin = async function (req, res, next) {
   try {
     const loginUser = await userService.userLogin(req.body);
@@ -59,4 +66,6 @@ userController.userLogin = async function (req, res, next) {
     return res.status(400).json({ status: 400, message: error.message });
   }
 };
+
+// Export
 module.exports = userController;

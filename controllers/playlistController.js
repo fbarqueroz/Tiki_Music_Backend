@@ -1,7 +1,8 @@
+// Var
 const playlistService = require('../services/playlistService');
-
 const playlistController = {};
 
+// Post controller
 playlistController.create = async function (req, res, next) {
   try {
     const newPlaylist = await playlistService.createPlaylist(req.body);
@@ -11,6 +12,7 @@ playlistController.create = async function (req, res, next) {
   }
 };
 
+// Get controller
 playlistController.getPlaylist = async function (req, res, next) {
   try {
     const playlist = await playlistService.getPlaylist();
@@ -20,6 +22,7 @@ playlistController.getPlaylist = async function (req, res, next) {
   }
 };
 
+// Put controller
 playlistController.updatePlaylist = async function (req, res, next) {
   try{
       const updatePlaylist = await playlistService.updatePlaylist(req.params, req.body);
@@ -29,6 +32,7 @@ playlistController.updatePlaylist = async function (req, res, next) {
   }
 }
 
+// Delete playlist controller
 playlistController.deletePlaylist = async function (req, res, next) {
   try{
       const deletePlaylist = await playlistService.deletePlaylist(req.params);
@@ -38,6 +42,7 @@ playlistController.deletePlaylist = async function (req, res, next) {
   }
 }
 
+// Delete song from playlist controller
 playlistController.deletePlaylistBySong = async function (req, res, next) {
   try{
       const deleteSongs = await playlistService.deleteSongs(req.params, req.body);
@@ -47,4 +52,5 @@ playlistController.deletePlaylistBySong = async function (req, res, next) {
   }
 }
 
+// Export
 module.exports = playlistController;
