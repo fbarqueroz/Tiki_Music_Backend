@@ -17,7 +17,7 @@ playlistController.getPlaylist = async function (req, res, next) {
   try {
     const id = req.query.id_user;
     console.log(id);
-    const playlist = await playlistService.getPlaylist(req.params);
+    const playlist = await playlistService.getPlaylist('Hola :(');
     return res.status(200).json({ status: 200, data: playlist, message: 'Successfully playlist retrieved' });
   } catch (error) {
     return res.status(400).json({ status: 400, message: error.message });
