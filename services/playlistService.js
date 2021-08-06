@@ -16,7 +16,7 @@ PlaylistService.getPlaylist = async function ({id_user}) {
     const playlist = await Playlists.find({id_user});
     return playlist;
   } catch (error) {
-    throw new Error('Error while Paginating the playlist ');
+    throw new Error(error);
   }
 };
 
