@@ -4,7 +4,7 @@ const PlaylistService = {};
 PlaylistService.createPlaylist = async function ({ songs, id_user, playlistName }) {
   try {
     const playlist = new Playlists({ songs, id_user, playlistName });
-    const newPlaylist = await playlist.save();
+    const newPlaylist = await playlists.save();
     return newPlaylist;
   } catch (error) {
     throw new Error('Error while save the playlist');
@@ -22,7 +22,7 @@ PlaylistService.getPlaylist = async function ({id_user}) {
 
 PlaylistService.getPlaylistId = async function ({ id }) {
   try {
-      const playlist = await Playlist.findById(id);
+      const playlist = await Playlists.findById(id);
       return playlist;
   } catch (error) {
       throw new Error(error.message);
@@ -42,7 +42,7 @@ PlaylistService.deletePlaylist = async function({ id }){
 PlaylistService.updatePlaylist = async function({id},{songs,id_user, playlistName}){
 try{
     const Playlist = await Playlists.findById(id);
-    const updatePlay = await Playlist.set({songs,id_user, playlistName});
+    const updatePlay = await Playlists.set({songs,id_user, playlistName});
     Playlist.songs.push(songs.toString());
     await updatePlay.save();
     return updatePlay;
