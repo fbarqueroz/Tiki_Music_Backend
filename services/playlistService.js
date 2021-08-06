@@ -20,7 +20,17 @@ PlaylistService.getPlaylist = async function () {
   }
 };
 
-PlaylistService.deletePlaylist = async function({id}){
+PlaylistService.getPlaylistId = async function ({ id }) {
+  try {
+      const playlist = await Playlist.findById(id);
+      return playlist;
+  } catch (error) {
+      throw new Error(error.message);
+  }
+};
+
+
+PlaylistService.deletePlaylist = async function({ id }){
   try{
       const Playlist = await Playlists.deleteOne({_id:id});
       return Playlist;
