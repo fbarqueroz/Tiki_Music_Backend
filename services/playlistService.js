@@ -1,4 +1,5 @@
 const Playlists = require('../models/playlistsModel');
+const mongoose = require('mongoose');
 
 const PlaylistService = {};
 PlaylistService.createPlaylist = async function ({ songs, id_user, playlistName }) {
@@ -13,7 +14,7 @@ PlaylistService.createPlaylist = async function ({ songs, id_user, playlistName 
 
 PlaylistService.getPlaylist = async function ({id_user}) {
   try {
-    const playlist = await Playlists.find({id_user});
+    const playlist = await Playlist.find({id_user: mongoose.Types.ObjectId(id_user)})
     return playlist;
   } catch (error) {
     throw new Error(error);
