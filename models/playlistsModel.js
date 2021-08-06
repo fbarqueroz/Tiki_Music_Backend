@@ -1,8 +1,8 @@
-// Playlist models database
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+// Schema structure
 const PlaylistSchema = new Schema({
   songs: {
     type: [String],

@@ -1,22 +1,9 @@
-/* eslint-disable import/no-unresolved */
-/*
-
-Modules for this proyect:
-npm i dotenv
-npm i md5
-npm i mongoose
-npm i nodemon
-npm i express
-npm i express-validator
-
-*/
-
 // modules
 require('dotenv').config();
 const express = require('express');
-
 const app = express();
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 // .env
 const HOSTNAME = process.env.HOSTNAME || 'localhost';
@@ -28,7 +15,7 @@ const favoriteRoute = require('./routes/favorite.route');
 const playlistRoute = require('./routes/playlistRoute');
 const recentlyPlayedRoute = require('./routes/recentlyPlayed.route');
 
-
+// Successful connection notification
 mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser:true});
 const db = mongoose.connection;
 db.on('error', error => console.log(error));
@@ -41,16 +28,19 @@ app.use(express.urlencoded({
 }));
 
 // Routers
+app.use(cors());
 app.use('/', userRoute);
 app.use('/', favoriteRoute);
 app.use('/', playlistRoute);
 app.use('/', recentlyPlayedRoute);
 
+// Information request error
 app.use('*', (req, res) => {
   res.status(400);
   res.send("Path cannot found");
 });
 
+// Localhost
 app.listen(PORT, HOSTNAME, () => {
   console.log(`Server running on ${HOSTNAME}:${PORT}`);
 });

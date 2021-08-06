@@ -24,7 +24,7 @@ userService.getUsers = async function () {
 userService.getUser = async function ({ id }) {
   try {
     const user = await User.findById(id);
-    let getUser = JSON.parse(JSON.stringify(users));
+    let getUser = JSON.parse(JSON.stringify(user));
     delete getUser.password;
     return user;
   } catch (error) {
@@ -53,4 +53,24 @@ userService.deleteUser = async function({id}){
       throw new Error ('Error while delete user');
   }
 }
+userService.userLogin = async function ({ email, password }) {
+  try {
+    const userInfo = await User.findOne({ email });
+    if (userInfo.password === md5(password)) {
+      const info = {
+        id: userInfo.id,
+       
+        status: true,
+      };
+      return info;
+    }
+    const info = {
+      status: false,
+    };
+    return info;
+  } catch (error) {
+    console.log(error.message);
+    throw new Error("Error doesn't exist User");
+  }
+};
 module.exports = userService;

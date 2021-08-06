@@ -1,7 +1,8 @@
+// Var
 const favoriteMusicService = require('../services/favorite.service')
-
 const favoriteMusicControllers = {};
 
+// Put controller
 favoriteMusicControllers.upsert = async function (req, res, next) {
     try {
         const newFavoriteMusic = await favoriteMusicService.upsertfavoriteMusic(req.body)
@@ -11,6 +12,7 @@ favoriteMusicControllers.upsert = async function (req, res, next) {
     }
 }
 
+// Get controller
 favoriteMusicControllers.getFavoriteMusicByUser = async function (req, res, next) {
     try {
         const favoriteMusic = await favoriteMusicService.getFavoriteMusicbyUser(req.params)
@@ -20,7 +22,7 @@ favoriteMusicControllers.getFavoriteMusicByUser = async function (req, res, next
     }
 }
 
-
+// Delete controller
 favoriteMusicControllers.deleteFavoriteMusicByUserAndSong= async function (req, res, next) {
     try {
         const favoriteMusic =  await favoriteMusicService.deleteFavoriteMusicByUserAndSong(req.params)
@@ -30,4 +32,5 @@ favoriteMusicControllers.deleteFavoriteMusicByUserAndSong= async function (req, 
     }
 }
 
+// Export
 module.exports = favoriteMusicControllers;
