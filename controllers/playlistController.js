@@ -12,17 +12,19 @@ playlistController.create = async function (req, res, next) {
   }
 };
 
-// Get controller
+// Get controller by user id
 playlistController.getPlaylist = async function (req, res, next) {
   try {
     const id = req.query.id_user;
-    const playlist = await playlistService.getPlaylist({ id });
+    console.log(id);
+    const playlist = await playlistService.getPlaylist(req.params);
     return res.status(200).json({ status: 200, data: playlist, message: 'Successfully playlist retrieved' });
   } catch (error) {
     return res.status(400).json({ status: 400, message: error.message });
   }
 };
 
+// Get controller by playlist id
 playlistController.getPlaylistById = async function (req, res, next) {
   try {
     const playlist = await playlistService.getPlaylistId(req.params);
