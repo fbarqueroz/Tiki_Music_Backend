@@ -2,6 +2,14 @@
 const playlistService = require('../services/playlistService');
 const playlistController = {};
 
+
+/*
+git add .
+git commit -m "changes"
+git push
+clear
+*/
+
 // Post controller
 playlistController.create = async function (req, res, next) {
   try {
