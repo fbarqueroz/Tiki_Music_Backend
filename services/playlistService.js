@@ -31,8 +31,7 @@ playlistService.deleteSongs = async function({id},{id_user, playlistName, songs}
         const Playlist = await playlist.findById(id);
         const updatePlay = await Playlist.set({id_user, playlistName});
         Playlist.songs.pull(songs.toString());      
-        await updatePlay.save();
-        /*return updatePlay;*/        
+        await updatePlay.save();       
         if(Playlist){
             return "Song deleted sucessfully"
         }
