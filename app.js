@@ -3,7 +3,6 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const cors = require('cors');
 
 // .env
 const HOSTNAME = process.env.HOSTNAME || 'localhost';
@@ -28,7 +27,6 @@ app.use(express.urlencoded({
 }));
 
 // Routers
-app.use(cors());
 app.use('/', userRoute);
 app.use('/', favoriteRoute);
 app.use('/', playlistRoute);

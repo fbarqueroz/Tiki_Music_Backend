@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const PlaylistService = {};
 PlaylistService.createPlaylist = async function ({ songs, id_user, playlistName }) {
   try {
-    const playlist = new Playlists({ songs, id_user, playlistName });
+    const playlists = new Playlists({ songs, id_user, playlistName });
     const newPlaylist = await playlists.save();
     return newPlaylist;
   } catch (error) {
