@@ -4,19 +4,16 @@ const Schema = mongoose.Schema;
 
 // Schema structure
 const PlaylistSchema = new Schema({
-  songs: {
-    type: [String],
-    required: true,
-  },
-  id_user: {
+  id_user:{
     type: Schema.Types.ObjectId,
-    required: true,
-  },
-  playlistName: {
+    required: true
+},
+playlistName:{
     type: String,
-    require: true,
-  },
+    required: true
+},
+songs:[String]
 }, { versionKey: false });
 
-const Playlist = mongoose.model('Playlist', PlaylistSchema);
-module.exports = Playlist;
+const playlist = mongoose.model('playlist', PlaylistSchema)
+module.exports = playlist;

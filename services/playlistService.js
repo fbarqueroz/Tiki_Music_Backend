@@ -1,56 +1,76 @@
-const Playlists = require('../models/playlistsModel');
+const playlist = require('../models/playlistsModel');
 const mongoose = require('mongoose');
 
-const PlaylistService = {};
-PlaylistService.createPlaylist = async function ({ songs, id_user, playlistName }) {
-  try {
-    const playlists = new Playlists({ songs, id_user, playlistName });
-    const newPlaylist = await playlists.save();
-    return newPlaylist;
-  } catch (error) {
-    throw new Error('Error while save the playlist');
-  }
-};
-
-PlaylistService.getPlaylist = async function ({id_user}) {
-  try {
-    const playlist = await Playlist.find({id_user: mongoose.Types.ObjectId(id_user)})
-    return playlist;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
-PlaylistService.getPlaylistId = async function ({ id }) {
-  try {
-      const playlist = await Playlists.findById(id);
-      return playlist;
-  } catch (error) {
-      throw new Error(error.message);
-  }
-};
+const playlistService = {}
 
 
-PlaylistService.deletePlaylist = async function({ id }){
-  try{
-      const Playlist = await Playlists.deleteOne({_id:id});
-      return Playlist;
-  }catch (error){
-      throw new Error ('Error while delete playlist')
-  }
+playlistService.createPlaylist = async function ({id_user, playlistName ,songs}){
+    try{
+        const Playlist = new playlist({id_user, songs, playlistName})
+        const newPlaylist = await Playlist.save();
+        return newPlaylist;
+    }catch(error){
+        throw new Error('Error while save playlist');
+    }
 }
 
-PlaylistService.updatePlaylist = async function({id},{songs,id_user, playlistName}){
-try{
-    const Playlist = await Playlists.findById(id);
-    const updatePlay = await Playlists.set({songs,id_user, playlistName});
-    Playlist.songs.push(songs.toString());
-    await updatePlay.save();
-    return updatePlay;
-}catch (error){
-  console.log(error)
-    throw new Error ('Error while save playlist')
-}
+playlistService.updateplaylist = async function({id},{id_user, playlistName, songs}){
+    try{
+        const Playlist = await playlist.findById(id);
+        const updatePlay = await Playlist.set({id_user, playlistName});
+        Playlist.songs.push(songs.toString());
+        await updatePlay.save();
+        return updatePlay;
+    }catch (error){
+        throw new Error('Error while update playlist');
+    }
 }
 
-module.exports = PlaylistService;
+playlistService.deleteSongs = async function({id},{id_user, playlistName, songs}){
+    try{
+        const Playlist = await playlist.findById(id);
+        const updatePlay = await Playlist.set({id_user, playlistName});
+        Playlist.songs.pull(songs.toString());      
+        await updatePlay.save();
+        /*return updatePlay;*/        
+        if(Playlist){
+            return "Song deleted sucessfully"
+        }
+    }catch(error){
+        throw new Error('Error while delete favorite');
+    }
+}
+playlistService.deletePlaylist = async function({id}){
+    try{
+        const Playlist = await playlist.deleteOne({_id:id});
+        if(Playlist){
+            return "Playlist deleted successfully"
+        }
+        return Playlist;
+    }catch(error){
+        throw new Error('Error while delete Playlist');
+    }
+}
+
+playlistService.getPlaylist = async function({id_user}){
+    try{    
+        const playlists = await playlist.find({id_user: mongoose.Types.ObjectId(id_user)});
+        return playlists;
+    }catch(error){
+        throw new Error ('Error while paginating Playlists');
+    }
+} 
+
+playlistService.getPlaylistOne = async function({id_user, id}){
+    try{
+        const Playlist = await playlist.find({id_user:mongoose.Types.ObjectId(id_user), _id:id}); 
+        return Playlist;
+    }catch(error){
+        throw new Error ('Error while paginating Playlists');
+    }
+}
+
+
+module.exports = playlistService;
+
+
